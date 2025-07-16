@@ -8,14 +8,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import Lottie from 'lottie-react';
 // Placeholder Lottie imports (replace with your own files)
-import heroAvatar from '@/public/lotties/hero-avatar.json';
-import assistantLottie from '@/public/lotties/assistant.json';
-import typeIntj from '@/public/lotties/type-intj.json';
-import typeEnfp from '@/public/lotties/type-enfp.json';
-import typeIstp from '@/public/lotties/type-istp.json';
-import typeInfj from '@/public/lotties/type-infj.json';
-import testimonialMale from '@/public/lotties/testimonial-male.json';
-import testimonialFemale from '@/public/lotties/testimonial-female.json';
+// import heroAvatar from '@/public/lotties/hero-avatar.json';
+// import assistantLottie from '@/public/lotties/assistant.json';
+// import typeIntj from '@/public/lotties/type-intj.json';
+// import typeEnfp from '@/public/lotties/type-enfp.json';
+// import typeIstp from '@/public/lotties/type-istp.json';
+// import typeInfj from '@/public/lotties/type-infj.json';
+// import testimonialMale from '@/public/lotties/testimonial-male.json';
+// import testimonialFemale from '@/public/lotties/testimonial-female.json';
 import BrainBackground from '@/components/BrainBackground';
 import { trackClick } from '@/lib/utils';
 import { useAuth } from '@/components/AuthProvider';
@@ -107,7 +107,7 @@ export default function Home() {
                   link: 'Start Test',
                   href: '/quiz',
                   userId: user?.uid,
-                  userEmail: user?.email,
+                  userEmail: user?.email || undefined,
                 });
               }}
             >
@@ -175,7 +175,7 @@ export default function Home() {
                     link: 'Instagram',
                     href: 'https://www.instagram.com/codesentinel.tech/',
                     userId: user?.uid,
-                    userEmail: user?.email,
+                    userEmail: user?.email || undefined,
                   });
                 }}
               >
@@ -198,7 +198,7 @@ export default function Home() {
                   link: 'Contact Us',
                   href: 'mailto:codesentinel.tech@gmail.com',
                   userId: user?.uid,
-                  userEmail: user?.email,
+                  userEmail: user?.email || undefined,
                 });
               }}
             >Contact Us</a>
