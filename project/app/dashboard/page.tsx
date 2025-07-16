@@ -114,7 +114,13 @@ export default function Dashboard() {
       badgeState.firstTest = quizHistory.length > 0;
       badgeState.explorer = (localStorage.getItem(`visitedTypes_${user.uid}`) ? JSON.parse(localStorage.getItem(`visitedTypes_${user.uid}`)!) : []).length >= 16;
       badgeState.socialSharer = !!localStorage.getItem(`sharedResults_${user.uid}`);
-      badgeState.growthSeeker = quizResult && personalityTypes[quizResult.type]?.growthTips && completedGrowthTips.length === personalityTypes[quizResult.type].growthTips.length && completedGrowthTips.length > 0;
+      const typeObj = quizResult ? personalityTypes[quizResult.type] : undefined;
+      badgeState.growthSeeker =
+        !!quizResult &&
+        !!typeObj &&
+        !!typeObj.growthTips &&
+        completedGrowthTips.length === typeObj.growthTips.length &&
+        completedGrowthTips.length > 0;
       setBadges(badgeState);
       localStorage.setItem(badgeKey, JSON.stringify(badgeState));
     }
@@ -233,7 +239,7 @@ export default function Dashboard() {
           const docRef = doc(db, 'streaks', user.uid);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            streakData = docSnap.data();
+            streakData = docSnap.data() as { streak: number; lastVisit: string };
           } else {
             // Fallback to localStorage
             const saved = localStorage.getItem(streakKey);
@@ -545,18 +551,18 @@ export default function Dashboard() {
                     </div>
                   )}
                 </div>
-                {personalityTypes[quizResult.type].careers && (
+                {personalityTypes[quizResult.type]?.careers && (
                   <div className="mb-2">
                     <span className="font-bold text-green-300">Best Careers:</span>
-                    {personalityTypes[quizResult.type].careers.slice(0, 3).map((c, i) => (
+                    {personalityTypes[quizResult.type]?.careers?.slice(0, 3).map((c, i) => (
                       <span key={i} className="ml-2 bg-green-400/20 text-green-100 px-2 py-1 rounded-full text-xs font-semibold">{c}</span>
                     ))}
                   </div>
                 )}
-                {personalityTypes[quizResult.type].famous && (
+                {personalityTypes[quizResult.type]?.famous && (
                   <div className="mb-2">
                     <span className="font-bold text-yellow-300">Famous:</span>
-                    {personalityTypes[quizResult.type].famous.slice(0, 3).map((f, i) => (
+                    {personalityTypes[quizResult.type]?.famous?.slice(0, 3).map((f, i) => (
                       <span key={i} className="ml-2 bg-yellow-400/20 text-yellow-100 px-2 py-1 rounded-full text-xs font-semibold">{f}</span>
                     ))}
                   </div>
@@ -571,7 +577,7 @@ export default function Dashboard() {
             <h2 className="text-2xl font-extrabold text-white mb-2">Growth Tracker</h2>
             <div className="text-gray-200 mb-4">Personal growth tips for your type. Check them off as you progress!</div>
             <ul className="space-y-3">
-              {personalityTypes[quizResult.type].growthTips.map((tip: string, idx: number) => (
+              {personalityTypes[quizResult.type]?.growthTips?.map((tip: string, idx: number) => (
                 <li key={idx} className="flex items-center gap-3">
                   <button
                     className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${completedGrowthTips.includes(tip) ? 'bg-green-500 border-green-400' : 'bg-transparent border-purple-400'}`}
