@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     title: 'Personality Test - Discover Your True Self',
     description: 'Take our comprehensive 54-question personality assessment to discover your unique personality type.',
     type: 'website',
-    url: 'https://personality-test.vercel.app',
+    url: 'https://personality-test-weld.vercel.app',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://personality-test-weld.vercel.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Discover Your True Self',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Personality Test - Discover Your True Self',
     description: 'Take our comprehensive 54-question personality assessment to discover your unique personality type.',
-    images: ['/og-image.png'],
+    images: ['https://personality-test-weld.vercel.app/og-image.png'],
   },
 };
 
