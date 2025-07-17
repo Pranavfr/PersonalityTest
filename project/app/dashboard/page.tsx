@@ -466,55 +466,55 @@ export default function Dashboard() {
     <div className="min-h-screen relative bg-gradient-to-br from-purple-900/60 via-blue-900/40 to-pink-900/30">
       <Navigation />
       {/* Cosmic background overlay (optional: add stars here if you want) */}
-      <div className="container mx-auto px-4 py-12 pb-24 flex flex-col gap-10">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 pb-16 sm:pb-24 flex flex-col gap-6 sm:gap-10 mt-16 sm:mt-20">
         {/* Profile Customization Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Profile</h2>
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Profile</h2>
             {profileLoading ? (
               <div className="text-gray-300">Loading profile...</div>
             ) : (
-            <div className="flex flex-col md:flex-row gap-6 items-center">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
               <div className="flex flex-col items-center">
                 <label htmlFor="avatar-upload" className="cursor-pointer group">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 border-4 border-purple-400 shadow-lg flex items-center justify-center overflow-hidden mb-2">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 border-4 border-purple-400 shadow-lg flex items-center justify-center overflow-hidden mb-2">
                     {profile.avatar ? (
                       <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
-                      <UserCircle2 className="w-16 h-16 text-white/80 group-hover:text-pink-300 transition-colors" />
+                      <UserCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-white/80 group-hover:text-pink-300 transition-colors" />
                     )}
                   </div>
                   <input id="avatar-upload" type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
                   <span className="text-xs text-purple-200 group-hover:text-pink-300 transition-colors">Change Avatar</span>
                 </label>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 {editingProfile ? (
                   <div className="flex flex-col gap-3">
                     <input
                       type="text"
-                      className="bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
+                      className="bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
                       placeholder="Display Name"
                       value={profileForm.name}
                       onChange={e => setProfileForm(f => ({ ...f, name: e.target.value }))}
                     />
                     <textarea
-                      className="bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
+                      className="bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
                       placeholder="Short Bio"
                       value={profileForm.bio}
                       onChange={e => setProfileForm(f => ({ ...f, bio: e.target.value }))}
                       rows={2}
                     />
-                    <div className="flex gap-2 mt-2">
-                      <button onClick={handleProfileSave} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all">Save</button>
-                      <button onClick={() => setEditingProfile(false)} className="bg-gray-700 text-white px-4 py-2 rounded-lg font-bold hover:bg-gray-600 transition-all">Cancel</button>
+                    <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                      <button onClick={handleProfileSave} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all text-sm sm:text-base">Save</button>
+                      <button onClick={() => setEditingProfile(false)} className="bg-gray-700 text-white px-4 py-2 rounded-lg font-bold hover:bg-gray-600 transition-all text-sm sm:text-base">Cancel</button>
                     </div>
                   </div>
                 ) : (
                   <div className="flex flex-col gap-1">
-                    <div className="text-lg font-bold text-white">{profile.name || user.displayName || user.email || 'User'}</div>
+                    <div className="text-base sm:text-lg font-bold text-white">{profile.name || user.displayName || user.email || 'User'}</div>
                     <div className="text-gray-300 text-sm mb-2">{profile.bio || 'No bio set.'}</div>
-                    <button onClick={() => setEditingProfile(true)} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all w-max">Edit Profile</button>
+                    <button onClick={() => setEditingProfile(true)} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all w-max text-sm sm:text-base">Edit Profile</button>
                   </div>
                 )}
               </div>
@@ -524,17 +524,17 @@ export default function Dashboard() {
         )}
         {/* Personality Type Deep Dive Card */}
         {quizResult && personalityTypes[quizResult.type] && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <div className="flex flex-col md:flex-row md:items-center md:gap-6 mb-2">
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 mb-2">
               <div className="flex-1">
-                <h2 className="text-2xl font-extrabold text-white mb-1">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-1">
                   {personalityTypes[quizResult.type].code} - {personalityTypes[quizResult.type].name}
                 </h2>
-                <div className="text-gray-200 mb-2">{personalityTypes[quizResult.type].description}</div>
+                <div className="text-gray-200 mb-2 text-sm sm:text-base">{personalityTypes[quizResult.type].description}</div>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {personalityTypes[quizResult.type].strengths && (
                     <div>
-                      <span className="font-bold text-purple-300">Strengths:</span>
+                      <span className="font-bold text-purple-300 text-sm sm:text-base">Strengths:</span>
                       {personalityTypes[quizResult.type].strengths.slice(0, 3).map((s, i) => (
                         <span key={i} className="ml-2 bg-purple-400/20 text-purple-100 px-2 py-1 rounded-full text-xs font-semibold">{s}</span>
                       ))}
@@ -544,7 +544,7 @@ export default function Dashboard() {
                 <div className="flex flex-wrap gap-2 mb-2">
                   {personalityTypes[quizResult.type].weaknesses && (
                     <div>
-                      <span className="font-bold text-pink-300">Weaknesses:</span>
+                      <span className="font-bold text-pink-300 text-sm sm:text-base">Weaknesses:</span>
                       {personalityTypes[quizResult.type].weaknesses.slice(0, 3).map((w, i) => (
                         <span key={i} className="ml-2 bg-pink-400/20 text-pink-100 px-2 py-1 rounded-full text-xs font-semibold">{w}</span>
                       ))}
@@ -553,7 +553,7 @@ export default function Dashboard() {
                 </div>
                 {personalityTypes[quizResult.type]?.careers && (
                   <div className="mb-2">
-                    <span className="font-bold text-green-300">Best Careers:</span>
+                    <span className="font-bold text-green-300 text-sm sm:text-base">Best Careers:</span>
                     {personalityTypes[quizResult.type]?.careers?.slice(0, 3).map((c, i) => (
                       <span key={i} className="ml-2 bg-green-400/20 text-green-100 px-2 py-1 rounded-full text-xs font-semibold">{c}</span>
                     ))}
@@ -561,7 +561,7 @@ export default function Dashboard() {
                 )}
                 {personalityTypes[quizResult.type]?.famous && (
                   <div className="mb-2">
-                    <span className="font-bold text-yellow-300">Famous:</span>
+                    <span className="font-bold text-yellow-300 text-sm sm:text-base">Famous:</span>
                     {personalityTypes[quizResult.type]?.famous?.slice(0, 3).map((f, i) => (
                       <span key={i} className="ml-2 bg-yellow-400/20 text-yellow-100 px-2 py-1 rounded-full text-xs font-semibold">{f}</span>
                     ))}
@@ -573,14 +573,14 @@ export default function Dashboard() {
         )}
         {/* Growth Tracker Card */}
         {quizResult && personalityTypes[quizResult.type]?.growthTips && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Growth Tracker</h2>
-            <div className="text-gray-200 mb-4">Personal growth tips for your type. Check them off as you progress!</div>
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Growth Tracker</h2>
+            <div className="text-gray-200 mb-4 text-sm sm:text-base">Personal growth tips for your type. Check them off as you progress!</div>
             <ul className="space-y-3">
               {personalityTypes[quizResult.type]?.growthTips?.map((tip: string, idx: number) => (
-                <li key={idx} className="flex items-center gap-3">
+                <li key={idx} className="flex items-start gap-3">
                   <button
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${completedGrowthTips.includes(tip) ? 'bg-green-500 border-green-400' : 'bg-transparent border-purple-400'}`}
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-200 mt-0.5 flex-shrink-0 ${completedGrowthTips.includes(tip) ? 'bg-green-500 border-green-400' : 'bg-transparent border-purple-400'}`}
                     aria-label={completedGrowthTips.includes(tip) ? 'Mark as incomplete' : 'Mark as complete'}
                     onClick={() => handleToggleTip(tip)}
                   >
@@ -588,7 +588,7 @@ export default function Dashboard() {
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                     )}
                   </button>
-                  <span className={`text-gray-100 ${completedGrowthTips.includes(tip) ? 'line-through opacity-60' : ''}`}>{tip}</span>
+                  <span className={`text-gray-100 text-sm sm:text-base ${completedGrowthTips.includes(tip) ? 'line-through opacity-60' : ''}`}>{tip}</span>
                 </li>
               ))}
             </ul>
@@ -596,74 +596,74 @@ export default function Dashboard() {
         )}
         {/* Streaks & Stats Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Streaks & Stats</h2>
-            <div className="flex flex-wrap gap-8 items-center">
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Streaks & Stats</h2>
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-8 items-center">
               <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-green-400">{streak}</span>
-                <span className="text-sm text-gray-300">Day Streak</span>
+                <span className="text-2xl sm:text-3xl font-bold text-green-400">{streak}</span>
+                <span className="text-xs sm:text-sm text-gray-300">Day Streak</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-blue-400">{stats.quizzes}</span>
-                <span className="text-sm text-gray-300">Quizzes Taken</span>
+                <span className="text-2xl sm:text-3xl font-bold text-blue-400">{stats.quizzes}</span>
+                <span className="text-xs sm:text-sm text-gray-300">Quizzes Taken</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-purple-400">{stats.typesViewed}</span>
-                <span className="text-sm text-gray-300">Types Viewed</span>
+                <span className="text-2xl sm:text-3xl font-bold text-purple-400">{stats.typesViewed}</span>
+                <span className="text-xs sm:text-sm text-gray-300">Types Viewed</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-pink-400">{stats.growthTips}</span>
-                <span className="text-sm text-gray-300">Growth Tips Completed</span>
+                <span className="text-2xl sm:text-3xl font-bold text-pink-400">{stats.growthTips}</span>
+                <span className="text-xs sm:text-sm text-gray-300">Growth Tips Completed</span>
               </div>
             </div>
             {streak === 0 && stats.quizzes === 0 && stats.typesViewed === 0 && stats.growthTips === 0 && (
-              <div className="text-gray-400 mt-4">Start exploring, taking quizzes, and growing to build your streak and stats!</div>
+              <div className="text-gray-400 mt-4 text-sm sm:text-base">Start exploring, taking quizzes, and growing to build your streak and stats!</div>
             )}
           </div>
         )}
         {/* Badges & Achievements Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Badges & Achievements</h2>
-            <div className="flex flex-wrap gap-6 items-center">
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Badges & Achievements</h2>
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-6 items-center">
               {/* First Test Completed */}
               <div className="flex flex-col items-center">
-                <Award className={`w-8 h-8 mb-1 ${badges.firstTest ? 'text-yellow-400' : 'text-gray-500 opacity-40'}`} />
-                <span className={`text-sm font-bold ${badges.firstTest ? 'text-yellow-200' : 'text-gray-400'}`}>First Test</span>
+                <Award className={`w-6 h-6 sm:w-8 sm:h-8 mb-1 ${badges.firstTest ? 'text-yellow-400' : 'text-gray-500 opacity-40'}`} />
+                <span className={`text-xs sm:text-sm font-bold ${badges.firstTest ? 'text-yellow-200' : 'text-gray-400'}`}>First Test</span>
               </div>
               {/* Explorer */}
               <div className="flex flex-col items-center">
-                <Globe className={`w-8 h-8 mb-1 ${badges.explorer ? 'text-blue-400' : 'text-gray-500 opacity-40'}`} />
-                <span className={`text-sm font-bold ${badges.explorer ? 'text-blue-200' : 'text-gray-400'}`}>Explorer</span>
+                <Globe className={`w-6 h-6 sm:w-8 sm:h-8 mb-1 ${badges.explorer ? 'text-blue-400' : 'text-gray-500 opacity-40'}`} />
+                <span className={`text-xs sm:text-sm font-bold ${badges.explorer ? 'text-blue-200' : 'text-gray-400'}`}>Explorer</span>
               </div>
               {/* Social Sharer */}
               <div className="flex flex-col items-center">
-                <Share2 className={`w-8 h-8 mb-1 ${badges.socialSharer ? 'text-pink-400' : 'text-gray-500 opacity-40'}`} />
-                <span className={`text-sm font-bold ${badges.socialSharer ? 'text-pink-200' : 'text-gray-400'}`}>Social Sharer</span>
+                <Share2 className={`w-6 h-6 sm:w-8 sm:h-8 mb-1 ${badges.socialSharer ? 'text-pink-400' : 'text-gray-500 opacity-40'}`} />
+                <span className={`text-xs sm:text-sm font-bold ${badges.socialSharer ? 'text-pink-200' : 'text-gray-400'}`}>Social Sharer</span>
               </div>
               {/* Growth Seeker */}
               <div className="flex flex-col items-center">
-                <CheckCircle className={`w-8 h-8 mb-1 ${badges.growthSeeker ? 'text-green-400' : 'text-gray-500 opacity-40'}`} />
-                <span className={`text-sm font-bold ${badges.growthSeeker ? 'text-green-200' : 'text-gray-400'}`}>Growth Seeker</span>
+                <CheckCircle className={`w-6 h-6 sm:w-8 sm:h-8 mb-1 ${badges.growthSeeker ? 'text-green-400' : 'text-gray-500 opacity-40'}`} />
+                <span className={`text-xs sm:text-sm font-bold ${badges.growthSeeker ? 'text-green-200' : 'text-gray-400'}`}>Growth Seeker</span>
               </div>
             </div>
             {Object.values(badges).every(v => !v) && (
-              <div className="text-gray-400 mt-4">No badges earned yet. Complete actions to unlock achievements!</div>
+              <div className="text-gray-400 mt-4 text-sm sm:text-base">No badges earned yet. Complete actions to unlock achievements!</div>
             )}
           </div>
         )}
         {/* Quiz History Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Quiz History</h2>
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Quiz History</h2>
             {quizHistory.length === 0 ? (
-              <div className="text-gray-400">No quiz history found.</div>
+              <div className="text-gray-400 text-sm sm:text-base">No quiz history found.</div>
             ) : (
               <ul className="space-y-2">
                 {quizHistory.slice(-5).reverse().map((entry, idx) => (
-                  <li key={idx} className="flex items-center gap-4">
-                    <span className="font-bold text-purple-200">{entry.type}</span>
-                    <span className="text-gray-300 text-xs">{new Date(entry.date).toLocaleString()}</span>
+                  <li key={idx} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                    <span className="font-bold text-purple-200 text-sm sm:text-base">{entry.type}</span>
+                    <span className="text-gray-300 text-xs sm:text-sm">{new Date(entry.date).toLocaleString()}</span>
                   </li>
                 ))}
               </ul>
@@ -672,19 +672,19 @@ export default function Dashboard() {
         )}
         {/* Bookmarks Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Bookmarks</h2>
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Bookmarks</h2>
             {bookmarksLoading ? (
-              <div className="text-gray-300">Loading bookmarks...</div>
+              <div className="text-gray-300 text-sm sm:text-base">Loading bookmarks...</div>
             ) : bookmarks.length === 0 ? (
-              <div className="text-gray-400">No bookmarks yet. Bookmark personality types to see them here!</div>
+              <div className="text-gray-400 text-sm sm:text-base">No bookmarks yet. Bookmark personality types to see them here!</div>
             ) : (
               <ul className="space-y-2">
                 {bookmarks.map((type, idx) => (
-                  <li key={type} className="flex items-center gap-4">
-                    <span className="font-bold text-purple-200">{type}</span>
-                    <span className="text-gray-300 text-sm">{personalityTypes[type]?.name || ''}</span>
-                    <button onClick={() => handleRemoveBookmark(type)} className="ml-auto text-pink-400 hover:text-pink-600 font-bold">Remove</button>
+                  <li key={type} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                    <span className="font-bold text-purple-200 text-sm sm:text-base">{type}</span>
+                    <span className="text-gray-300 text-xs sm:text-sm">{personalityTypes[type]?.name || ''}</span>
+                    <button onClick={() => handleRemoveBookmark(type)} className="text-pink-400 hover:text-pink-600 font-bold text-sm sm:text-base w-max">Remove</button>
                   </li>
                 ))}
               </ul>
@@ -693,12 +693,12 @@ export default function Dashboard() {
         )}
         {/* Notifications & Reminders Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Notifications & Reminders</h2>
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Notifications & Reminders</h2>
             {/* Site notifications (hardcoded for now) */}
             <div className="mb-4">
-              <div className="text-purple-200 font-bold mb-1">Site Updates</div>
-              <ul className="list-disc pl-5 text-gray-200 text-sm space-y-1">
+              <div className="text-purple-200 font-bold mb-1 text-sm sm:text-base">Site Updates</div>
+              <ul className="list-disc pl-5 text-gray-200 text-xs sm:text-sm space-y-1">
                 <li>🎉 New dashboard features rolling out now!</li>
                 <li>🌌 Enjoy the new cosmic, glassy design everywhere.</li>
                 <li>🔒 Your profile and bookmarks now sync across devices.</li>
@@ -706,40 +706,40 @@ export default function Dashboard() {
             </div>
             {/* Personal reminders */}
             <div className="mb-2">
-              <div className="text-pink-200 font-bold mb-1">Your Reminders</div>
+              <div className="text-pink-200 font-bold mb-1 text-sm sm:text-base">Your Reminders</div>
               {remindersLoading ? (
-                <div className="text-gray-300">Loading reminders...</div>
+                <div className="text-gray-300 text-sm sm:text-base">Loading reminders...</div>
               ) : reminders.length === 0 ? (
-                <div className="text-gray-400">No reminders set. Add one below!</div>
+                <div className="text-gray-400 text-sm sm:text-base">No reminders set. Add one below!</div>
               ) : (
                 <ul className="space-y-2">
                   {reminders.map((rem, idx) => (
-                    <li key={idx} className="flex items-center gap-3">
-                      <span className="text-gray-100">{rem.text}</span>
+                    <li key={idx} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                      <span className="text-gray-100 text-sm sm:text-base">{rem.text}</span>
                       {rem.date && <span className="text-xs text-gray-400">({new Date(rem.date).toLocaleDateString()})</span>}
-                      <button onClick={() => handleRemoveReminder(idx)} className="ml-auto text-pink-400 hover:text-pink-600 font-bold">Remove</button>
+                      <button onClick={() => handleRemoveReminder(idx)} className="text-pink-400 hover:text-pink-600 font-bold text-sm sm:text-base w-max">Remove</button>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 items-center mt-2">
+            <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center mt-2">
               <input
                 type="text"
-                className="flex-1 bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
+                className="flex-1 bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
                 placeholder="Add a reminder (e.g., Retake the test in 3 months)"
                 value={reminderInput}
                 onChange={e => setReminderInput(e.target.value)}
               />
               <input
                 type="date"
-                className="bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
+                className="bg-[#232946]/80 border border-purple-400/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
                 value={reminderDate}
                 onChange={e => setReminderDate(e.target.value)}
               />
               <button
                 onClick={handleAddReminder}
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all text-sm sm:text-base"
               >
                 Add
               </button>
@@ -748,41 +748,41 @@ export default function Dashboard() {
         )}
         {/* Data & Privacy Card */}
         {user && (
-          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-10">
-            <h2 className="text-2xl font-extrabold text-white mb-2">Data & Privacy</h2>
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 border border-purple-400/30 shadow-2xl text-left flex flex-col gap-4 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-2">Data & Privacy</h2>
+            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
               <button
                 onClick={handleDownloadData}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-blue-600 hover:to-purple-700 transition-all"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:from-blue-600 hover:to-purple-700 transition-all text-sm sm:text-base"
               >
                 Download My Data (JSON)
               </button>
               <button
                 onClick={handleDownloadCard}
-                className="bg-gradient-to-r from-green-400 to-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:from-green-500 hover:to-blue-700 transition-all"
+                className="bg-gradient-to-r from-green-400 to-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:from-green-500 hover:to-blue-700 transition-all text-sm sm:text-base"
               >
                 Download My Card (PNG)
               </button>
               <button
                 onClick={() => setDeleteConfirm(true)}
-                className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-red-700 transition-all"
+                className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-4 py-2 rounded-lg font-bold hover:from-pink-600 hover:to-red-700 transition-all text-sm sm:text-base"
               >
                 Delete My Data
               </button>
             </div>
             {deleteConfirm && (
               <div className="mt-4 bg-red-900/60 border border-red-400 rounded-lg p-4 text-red-200">
-                <div className="font-bold mb-2">Are you sure you want to delete all your data? This cannot be undone.</div>
-                <div className="flex gap-2">
+                <div className="font-bold mb-2 text-sm sm:text-base">Are you sure you want to delete all your data? This cannot be undone.</div>
+                <div className="flex flex-col sm:flex-row gap-2">
                   <button
                     onClick={handleDeleteData}
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition-all"
+                    className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition-all text-sm sm:text-base"
                   >
                     Yes, Delete
                   </button>
                   <button
                     onClick={() => setDeleteConfirm(false)}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg font-bold hover:bg-gray-600 transition-all"
+                    className="bg-gray-700 text-white px-4 py-2 rounded-lg font-bold hover:bg-gray-600 transition-all text-sm sm:text-base"
                   >
                     Cancel
                   </button>
@@ -843,49 +843,49 @@ export default function Dashboard() {
           </div>
         )}
         {/* Quick Links Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <Link href="/personalities" className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
-            <Users className="w-8 h-8 text-blue-400 mb-2" />
-            <div className="text-lg font-bold text-white mb-1">Explore Types</div>
-            <div className="text-gray-200 text-sm">See all 16 personality types</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
+          <Link href="/personalities" className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
+            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400 mb-2" />
+            <div className="text-base sm:text-lg font-bold text-white mb-1">Explore Types</div>
+            <div className="text-gray-200 text-xs sm:text-sm">See all 16 personality types</div>
           </Link>
-          <Link href="/growth" className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
-            <Lightbulb className="w-8 h-8 text-pink-400 mb-2" />
-            <div className="text-lg font-bold text-white mb-1">Growth</div>
-            <div className="text-gray-200 text-sm">Personal growth tips for your type</div>
+          <Link href="/growth" className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
+            <Lightbulb className="w-6 h-6 sm:w-8 sm:h-8 text-pink-400 mb-2" />
+            <div className="text-base sm:text-lg font-bold text-white mb-1">Growth</div>
+            <div className="text-gray-200 text-xs sm:text-sm">Personal growth tips for your type</div>
           </Link>
-          <Link href="/compatibility" className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
-            <Users className="w-8 h-8 text-purple-400 mb-2" />
-            <div className="text-lg font-bold text-white mb-1">Compatibility</div>
-            <div className="text-gray-200 text-sm">See how types connect in relationships</div>
+          <Link href="/compatibility" className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
+            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400 mb-2" />
+            <div className="text-base sm:text-lg font-bold text-white mb-1">Compatibility</div>
+            <div className="text-gray-200 text-xs sm:text-sm">See how types connect in relationships</div>
           </Link>
-          <Link href="/careers" className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
-            <Target className="w-8 h-8 text-green-400 mb-2" />
-            <div className="text-lg font-bold text-white mb-1">Careers</div>
-            <div className="text-gray-200 text-sm">Best jobs for your personality</div>
+          <Link href="/careers" className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
+            <Target className="w-6 h-6 sm:w-8 sm:h-8 text-green-400 mb-2" />
+            <div className="text-base sm:text-lg font-bold text-white mb-1">Careers</div>
+            <div className="text-gray-200 text-xs sm:text-sm">Best jobs for your personality</div>
           </Link>
-          <Link href="/faq" className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
-            <Book className="w-8 h-8 text-yellow-400 mb-2" />
-            <div className="text-lg font-bold text-white mb-1">FAQ</div>
-            <div className="text-gray-200 text-sm">Answers to common questions</div>
+          <Link href="/faq" className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
+            <Book className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 mb-2" />
+            <div className="text-base sm:text-lg font-bold text-white mb-1">FAQ</div>
+            <div className="text-gray-200 text-xs sm:text-sm">Answers to common questions</div>
           </Link>
-          <Link href="/about" className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
-            <Info className="w-8 h-8 text-pink-400 mb-2" />
-            <div className="text-lg font-bold text-white mb-1">About</div>
-            <div className="text-gray-200 text-sm">Learn about this project</div>
+          <Link href="/about" className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center hover:scale-[1.03] transition-all">
+            <Info className="w-6 h-6 sm:w-8 sm:h-8 text-pink-400 mb-2" />
+            <div className="text-base sm:text-lg font-bold text-white mb-1">About</div>
+            <div className="text-gray-200 text-xs sm:text-sm">Learn about this project</div>
           </Link>
         </div>
         {/* Community Card */}
-        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto bg-[#18192a]/90 rounded-3xl p-6 sm:p-8 md:p-10 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center">
-          <h3 className="text-2xl font-extrabold text-purple-100 mb-4 flex flex-col items-center">
+        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto bg-[#18192a]/90 rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-purple-100 mb-4 flex flex-col items-center">
             Join the Community!
-            <span className="mt-2 text-base text-gray-300">Follow us on</span>
+            <span className="mt-2 text-sm sm:text-base text-gray-300">Follow us on</span>
             <a href="https://www.instagram.com/codesentinel.tech/" target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center justify-center text-pink-400 hover:text-pink-500 transition-colors">
-              <Instagram className="w-7 h-7" />
+              <Instagram className="w-6 h-6 sm:w-7 sm:h-7" />
             </a>
           </h3>
-          <p className="text-lg text-gray-200 mb-2">
-            <span className="font-bold text-pink-400 text-2xl">{clickCount.toLocaleString()}</span> personalities and counting—add yours!
+          <p className="text-base sm:text-lg text-gray-200 mb-2">
+            <span className="font-bold text-pink-400 text-xl sm:text-2xl">{clickCount.toLocaleString()}</span> personalities and counting—add yours!
           </p>
         </div>
       </div>

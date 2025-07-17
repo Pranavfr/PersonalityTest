@@ -66,13 +66,13 @@ export default function TraitBreakdown({ percentages }: TraitBreakdownProps) {
   };
 
   return (
-    <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-3xl p-8 border border-white/20 dark:border-gray-700/20 mb-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">Personality Breakdown</h2>
-        <p className="text-gray-600 dark:text-gray-400">Hover over each trait to learn more</p>
+    <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-white/20 dark:border-gray-700/20 mb-6 sm:mb-8">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">Personality Breakdown</h2>
+        <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Hover over each trait to learn more</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {traits.map((trait) => {
           const percentage = percentages[trait.key as keyof typeof percentages];
           const IconComponent = trait.icon;
@@ -85,71 +85,42 @@ export default function TraitBreakdown({ percentages }: TraitBreakdownProps) {
               onMouseEnter={() => setHoveredTrait(trait.key)}
               onMouseLeave={() => setHoveredTrait(null)}
             >
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:scale-105">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-xl bg-gradient-to-r ${getGradient(percentage)}`}>
-                      <IconComponent className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{trait.title}</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{trait.description}</p>
-                    </div>
+              <div className="bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/20 dark:border-gray-600/20 shadow-lg transition-all duration-300 hover:shadow-xl">
+                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200 capitalize">{trait.key}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{trait.description}</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">{percentage}%</div>
-                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                      {getTraitName(trait, percentage)}
+                    <div className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{percentage}%</div>
+                    <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      {percentage >= 50 ? trait.positive : trait.negative}
                     </div>
                   </div>
                 </div>
 
-                {/* Progress Circle */}
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                    {/* Background circle */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      stroke="currentColor"
-                      strokeWidth="8"
-                      fill="transparent"
-                      className="text-gray-200 dark:text-gray-700"
-                    />
-                    {/* Progress circle */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      stroke="url(#gradient)"
-                      strokeWidth="8"
-                      fill="transparent"
-                      strokeDasharray={`${2 * Math.PI * 40}`}
-                      strokeDashoffset={`${2 * Math.PI * 40 * (1 - percentage / 100)}`}
-                      className="transition-all duration-1000 ease-out"
-                      strokeLinecap="round"
-                    />
-                    <defs>
-                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" className={`${getGradient(percentage).split(' ')[0].replace('from-', 'text-')}`} />
-                        <stop offset="100%" className={`${getGradient(percentage).split(' ')[1].replace('to-', 'text-')}`} />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg font-bold text-gray-800 dark:text-gray-200">{percentage}%</span>
-                  </div>
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 sm:h-3 mb-3 sm:mb-4">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 sm:h-3 rounded-full transition-all duration-1000"
+                    style={{ width: `${percentage}%` }}
+                  />
                 </div>
 
-                {/* Tooltip */}
+                {/* Hover Info */}
                 {isHovered && (
                   <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full z-10">
-                    <div className="bg-gray-900 dark:bg-gray-700 text-white text-sm rounded-lg px-4 py-2 max-w-xs text-center">
-                      <Info className="w-4 h-4 inline mr-1" />
-                      {trait.tooltip}
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700" />
+                    <div className="bg-gray-900 dark:bg-gray-800 text-white p-3 sm:p-4 rounded-xl shadow-2xl border border-gray-700 max-w-xs">
+                      <div className="text-sm sm:text-base font-semibold mb-2">
+                        {percentage >= 50 ? trait.positive : trait.negative}
+                      </div>
+                      <div className="text-xs sm:text-sm text-gray-300">
+                        {percentage >= 50 ? trait.tooltip : ''}
+                      </div>
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-800" />
                     </div>
                   </div>
                 )}

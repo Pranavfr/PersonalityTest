@@ -195,67 +195,71 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen pt-24 bg-gradient-to-br from-[#1a0033] via-[#2d004d] to-[#0a001a] flex flex-col items-center justify-start">
-      <div className="w-full max-w-4xl p-8 rounded-2xl bg-white/5 border border-purple-500 shadow-xl backdrop-blur-md mt-8">
-        <h1 className="text-4xl font-extrabold text-white mb-4 tracking-wide neon-glow">Admin Dashboard</h1>
-        <p className="text-lg text-purple-200 mb-8">Welcome, Pranav! Here you can view all site activity and manage the platform.</p>
+    <main className="min-h-screen pt-24 sm:pt-28 bg-gradient-to-br from-[#1a0033] via-[#2d004d] to-[#0a001a] flex flex-col items-center justify-start">
+      <div className="w-full max-w-4xl p-4 sm:p-6 lg:p-8 rounded-2xl bg-white/5 border border-purple-500 shadow-xl backdrop-blur-md mt-4 sm:mt-8">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-wide neon-glow">Admin Dashboard</h1>
+        <p className="text-base sm:text-lg text-purple-200 mb-6 sm:mb-8">Welcome, Pranav! Here you can view all site activity and manage the platform.</p>
         {loadingClicks ? (
-          <div className="text-white/80 text-center py-12 text-xl font-semibold opacity-60">Loading analytics...</div>
+          <div className="text-white/80 text-center py-12 text-lg sm:text-xl font-semibold opacity-60">Loading analytics...</div>
         ) : error ? (
-          <div className="text-red-400 text-center py-12 text-xl font-semibold">{error}</div>
+          <div className="text-red-400 text-center py-12 text-lg sm:text-xl font-semibold">{error}</div>
         ) : (
           <>
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div className="bg-[#18192a]/80 rounded-xl p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
-                <div className="text-3xl font-extrabold text-white mb-2">{totalClicks}</div>
-                <div className="text-purple-200 font-bold">Total Clicks</div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div className="bg-[#18192a]/80 rounded-xl p-4 sm:p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
+                <div className="text-2xl sm:text-3xl font-extrabold text-white mb-2">{totalClicks}</div>
+                <div className="text-purple-200 font-bold text-xs sm:text-sm text-center">Total Clicks</div>
               </div>
-              <div className="bg-[#18192a]/80 rounded-xl p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
-                <div className="text-3xl font-extrabold text-white mb-2">{todayClicks}</div>
-                <div className="text-purple-200 font-bold">Clicks Today</div>
+              <div className="bg-[#18192a]/80 rounded-xl p-4 sm:p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
+                <div className="text-2xl sm:text-3xl font-extrabold text-white mb-2">{todayClicks}</div>
+                <div className="text-purple-200 font-bold text-xs sm:text-sm text-center">Clicks Today</div>
               </div>
-              <div className="bg-[#18192a]/80 rounded-xl p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
-                <div className="text-3xl font-extrabold text-white mb-2">{weekClicks}</div>
-                <div className="text-purple-200 font-bold">Clicks This Week</div>
+              <div className="bg-[#18192a]/80 rounded-xl p-4 sm:p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
+                <div className="text-2xl sm:text-3xl font-extrabold text-white mb-2">{weekClicks}</div>
+                <div className="text-purple-200 font-bold text-xs sm:text-sm text-center">Clicks This Week</div>
               </div>
-              <div className="bg-[#18192a]/80 rounded-xl p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
-                <div className="text-3xl font-extrabold text-white mb-2">{monthClicks}</div>
-                <div className="text-purple-200 font-bold">Clicks This Month</div>
+              <div className="bg-[#18192a]/80 rounded-xl p-4 sm:p-6 border border-purple-400/30 shadow-lg flex flex-col items-center">
+                <div className="text-2xl sm:text-3xl font-extrabold text-white mb-2">{monthClicks}</div>
+                <div className="text-purple-200 font-bold text-xs sm:text-sm text-center">Clicks This Month</div>
               </div>
             </div>
-            <div className="bg-[#18192a]/80 rounded-2xl p-6 border border-purple-400/30 shadow-lg mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Clicks Over Time</h2>
-              <Bar data={chartData} options={{ plugins: { legend: { labels: { color: '#fff' } } }, scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } } }} />
+            <div className="bg-[#18192a]/80 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-lg mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Clicks Over Time</h2>
+              <div className="w-full overflow-x-auto">
+                <div className="min-w-[600px]">
+                  <Bar data={chartData} options={{ plugins: { legend: { labels: { color: '#fff' } } }, scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } } }} />
+                </div>
+              </div>
             </div>
-            <div className="bg-[#18192a]/80 rounded-2xl p-6 border border-purple-400/30 shadow-lg mt-12">
-              <h2 className="text-2xl font-bold text-white mb-4">Click Event Explorer</h2>
-              <div className="flex flex-wrap gap-4 mb-4">
+            <div className="bg-[#18192a]/80 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-lg mt-8 sm:mt-12">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Click Event Explorer</h2>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-4">
                 <input
                   type="text"
                   placeholder="Filter by link..."
                   value={filterLink}
                   onChange={e => { setPage(1); setFilterLink(e.target.value); }}
-                  className="bg-[#232946] border border-purple-400/30 rounded-lg px-3 py-2 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="bg-[#232946] border border-purple-400/30 rounded-lg px-3 py-2 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base flex-1"
                 />
                 <input
                   type="text"
                   placeholder="Filter by country..."
                   value={filterCountry}
                   onChange={e => { setPage(1); setFilterCountry(e.target.value); }}
-                  className="bg-[#232946] border border-purple-400/30 rounded-lg px-3 py-2 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="bg-[#232946] border border-purple-400/30 rounded-lg px-3 py-2 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base flex-1"
                 />
               </div>
               <div className="overflow-x-auto rounded-xl">
-                <table className="min-w-full text-sm text-left text-purple-100">
+                <table className="min-w-full text-xs sm:text-sm text-left text-purple-100">
                   <thead className="bg-[#2d004d]/80">
                     <tr>
-                      <th className="px-4 py-2">Link</th>
-                      <th className="px-4 py-2">Href</th>
-                      <th className="px-4 py-2">User</th>
-                      <th className="px-4 py-2">Country</th>
-                      <th className="px-4 py-2">Region</th>
-                      <th className="px-4 py-2">Timestamp</th>
-                      <th className="px-4 py-2">Delete</th>
+                      <th className="px-2 sm:px-4 py-2">Link</th>
+                      <th className="px-2 sm:px-4 py-2 hidden sm:table-cell">Href</th>
+                      <th className="px-2 sm:px-4 py-2">User</th>
+                      <th className="px-2 sm:px-4 py-2 hidden lg:table-cell">Country</th>
+                      <th className="px-2 sm:px-4 py-2 hidden lg:table-cell">Region</th>
+                      <th className="px-2 sm:px-4 py-2 hidden md:table-cell">Timestamp</th>
+                      <th className="px-2 sm:px-4 py-2">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -263,19 +267,19 @@ export default function AdminPage() {
                       <tr><td colSpan={7} className="text-center py-8 text-purple-300">No click events found.</td></tr>
                     ) : paginatedClicks.map((click, i) => (
                       <tr key={i} className="border-b border-purple-400/10 hover:bg-[#232946]/60 transition-all">
-                        <td className="px-4 py-2">{click.link}</td>
-                        <td className="px-4 py-2 break-all">{click.href}</td>
-                        <td className="px-4 py-2">{click.userEmail || <span className="italic text-purple-400">Anonymous</span>}</td>
-                        <td className="px-4 py-2">{click.country || <span className="text-purple-400">-</span>}</td>
-                        <td className="px-4 py-2">{click.region || <span className="text-purple-400">-</span>}</td>
-                        <td className="px-4 py-2">{click.timestamp ? new Date(click.timestamp).toLocaleString() : '-'}</td>
-                        <td className="px-4 py-2 text-center">
+                        <td className="px-2 sm:px-4 py-2 break-words">{click.link}</td>
+                        <td className="px-2 sm:px-4 py-2 break-all hidden sm:table-cell">{click.href}</td>
+                        <td className="px-2 sm:px-4 py-2 break-words">{click.userEmail || <span className="italic text-purple-400">Anonymous</span>}</td>
+                        <td className="px-2 sm:px-4 py-2 hidden lg:table-cell">{click.country || <span className="text-purple-400">-</span>}</td>
+                        <td className="px-2 sm:px-4 py-2 hidden lg:table-cell">{click.region || <span className="text-purple-400">-</span>}</td>
+                        <td className="px-2 sm:px-4 py-2 hidden md:table-cell">{click.timestamp ? new Date(click.timestamp).toLocaleString() : '-'}</td>
+                        <td className="px-2 sm:px-4 py-2 text-center">
                           <button
-                            className="text-red-400 hover:text-red-600 transition-colors"
+                            className="text-red-400 hover:text-red-600 transition-colors touch-manipulation"
                             title="Delete click event"
                             onClick={() => handleDeleteClick(click._docId)}
                           >
-                            <Trash2 className="w-5 h-5" />
+                            <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                           </button>
                         </td>
                       </tr>
@@ -283,16 +287,16 @@ export default function AdminPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-purple-200">Page {page} of {totalPages || 1}</span>
+              <div className="flex flex-col sm:flex-row justify-between items-center mt-4 gap-2">
+                <span className="text-purple-200 text-sm">Page {page} of {totalPages || 1}</span>
                 <div className="flex gap-2">
                   <button
-                    className="px-3 py-1 rounded bg-purple-700/60 text-white font-bold disabled:opacity-40"
+                    className="px-3 py-1 rounded bg-purple-700/60 text-white font-bold disabled:opacity-40 text-sm touch-manipulation"
                     onClick={() => setPage(p => Math.max(1, p - 1))}
                     disabled={page === 1}
                   >Prev</button>
                   <button
-                    className="px-3 py-1 rounded bg-purple-700/60 text-white font-bold disabled:opacity-40"
+                    className="px-3 py-1 rounded bg-purple-700/60 text-white font-bold disabled:opacity-40 text-sm touch-manipulation"
                     onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages || totalPages === 0}
                   >Next</button>

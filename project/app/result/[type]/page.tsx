@@ -83,7 +83,7 @@ export default function ResultPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <div className="container mx-auto max-w-6xl pt-24">
+      <div className="container mx-auto max-w-6xl pt-24 sm:pt-28 px-4 sm:px-6">
         {/* Hero Section */}
         <PersonalityHero personalityType={personalityType} />
 
@@ -107,30 +107,10 @@ export default function ResultPage() {
         />
 
         {/* Footer */}
-        <div className="text-center mt-16">
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-8 border border-white/20 dark:border-gray-700/20">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-              Continue Your Journey
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-              Understanding your personality is just the beginning. Use these insights to grow, 
-              build better relationships, and make decisions that align with your authentic self.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/"
-                className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-medium transition-colors border border-gray-200 dark:border-gray-700"
-              >
-                Back to Home
-              </Link>
-              <button
-                onClick={handleRestart}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-colors"
-              >
-                Explore Another Type
-              </button>
-            </div>
-          </div>
+        <div className="text-center py-8 sm:py-12">
+          <p className="text-gray-400 text-sm sm:text-base">
+            Ready to explore more? Check out other personality types or take the test again!
+          </p>
         </div>
       </div>
     </div>

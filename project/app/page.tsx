@@ -88,105 +88,131 @@ export default function Home() {
       <BrainBackground />
       <Navigation />
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center px-4 pt-24 pb-32 min-h-[60vh]">
+      <section className="flex flex-col items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 pb-20 sm:pb-32 min-h-[60vh]">
         {/* Aurora background restored */}
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-purple-900/60 via-blue-900/40 to-pink-900/30 blur-2xl pointer-events-none" />
-        <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-12 border border-purple-400/30 shadow-2xl text-center animate-fade-in flex flex-col items-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
+        <div className="max-w-3xl mx-auto bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-6 sm:p-8 md:p-12 border border-purple-400/30 shadow-2xl text-center animate-fade-in flex flex-col items-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 drop-shadow-lg">
             Discover Your <span className="bg-gradient-to-r from-yellow-400 to-pink-500 bg-clip-text text-transparent">True Self</span>
           </h1>
-          <p className="text-2xl text-gray-200 mb-8 font-semibold">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8 font-semibold">
             Take our comprehensive 54-question personality assessment and unlock deep insights about your unique strengths, preferences, and growth opportunities.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-            <a
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-md sm:max-w-lg">
+            <Link
               href="/quiz"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#232946]/90 text-purple-100 font-bold text-xl shadow-lg border-2 border-purple-400/40 hover:bg-[#232946] transition-all duration-200"
+              className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2 min-h-[48px] sm:min-h-[56px]"
               onClick={async () => {
                 await trackClick({
                   link: 'Start Test',
                   href: '/quiz',
-                  userId: user?.uid,
+                  userId: user?.uid || undefined,
                   userEmail: user?.email || undefined,
                 });
               }}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" /></svg>
-              Start Your Test
-            </a>
-            <div className="flex items-center gap-2 text-lg text-gray-200 font-semibold">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-              Takes 10-15 minutes
-            </div>
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+              Start Test
+            </Link>
+            <Link
+              href="/personalities"
+              className="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 border border-white/20 flex items-center justify-center gap-2 min-h-[48px] sm:min-h-[56px]"
+              onClick={async () => {
+                await trackClick({
+                  link: 'Explore Types',
+                  href: '/personalities',
+                  userId: user?.uid || undefined,
+                  userEmail: user?.email || undefined,
+                });
+              }}
+            >
+              <Users className="w-5 h-5 sm:w-6 sm:h-6" />
+              Explore Types
+            </Link>
           </div>
         </div>
       </section>
 
-        {/* Steps Section */}
-        <section className="max-w-6xl mx-auto flex flex-col md:flex-row flex-wrap gap-6 md:gap-8 justify-center items-stretch px-2 sm:px-4 py-8 md:py-12 animate-fade-in-up w-full">
-          {steps.map((step, i) => (
-            <div
-              key={i}
-              className="w-full max-w-xs md:max-w-sm flex-1 bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl hover:shadow-3xl hover:scale-[1.02] transition-all duration-200 flex flex-col items-center text-center mx-auto"
-            >
-              <step.icon className="w-12 h-12 mb-4 text-[#E92EFB] drop-shadow-[0_0_8px_#E92EFB88] group-hover:text-[#FF2079] transition-all duration-200" />
-              <h3 className="text-xl font-bold text-purple-100 mb-2">{step.title}</h3>
-              <p className="text-gray-200">{step.desc}</p>
+      {/* Features Section */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 animate-fade-in-up">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 sm:mb-6">
+            How It <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Works</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-200 max-w-3xl mx-auto">
+            Our scientifically-backed assessment helps you understand your personality type and unlock your potential.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="bg-[#18192a]/90 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-purple-400/30 shadow-2xl text-center hover:scale-105 transition-all duration-300">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <step.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">{step.title}</h3>
+              <p className="text-gray-200 text-sm sm:text-base">{step.desc}</p>
             </div>
           ))}
-        </section>
+        </div>
+      </section>
 
-        {/* Personality Types Grid */}
-        <section className="max-w-6xl mx-auto px-2 sm:px-4 py-10 md:py-16 animate-fade-in-up w-full">
-          <div className="w-full flex justify-center mb-8 md:mb-10">
-            <div className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl flex items-center justify-center">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-white text-center m-0">Explore Personality Types</h2>
+      {/* Personality Types Preview */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 animate-fade-in-up w-full">
+        <div className="w-full flex justify-center mb-6 sm:mb-8 md:mb-10">
+          <div className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl flex items-center justify-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white text-center m-0">Explore Personality Types</h2>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 w-full">
+          {personalityTypes.map((type, i) => (
+            <div
+              key={i}
+              className="bg-[#18192a]/90 rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-2xl hover:shadow-3xl hover:scale-[1.02] transition-all duration-200 flex flex-col items-center text-center"
+            >
+              <type.icon className="w-8 h-8 sm:w-10 sm:h-10 text-blue-400 mb-3" />
+              <div className="text-lg sm:text-xl font-bold text-white mb-1">{type.code}</div>
+              <div className="text-sm sm:text-base text-gray-200 mb-2 font-semibold">{type.name}</div>
+              <button
+                className="text-purple-100 hover:underline text-xs sm:text-sm font-bold transition-all duration-200"
+                // onClick={() => setModalType(type)} // For modal integration
+              >
+                Learn more
+              </button>
             </div>
-          </div>
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 w-full">
-            {personalityTypes.map((type, i) => (
-              <div
-                key={i}
-                className="bg-[#18192a]/90 rounded-2xl p-6 border border-purple-400/30 shadow-2xl hover:shadow-3xl hover:scale-[1.02] transition-all duration-200 flex flex-col items-center text-center"
-              >
-                <type.icon className="w-10 h-10 text-blue-400 mb-3" />
-                <div className="text-xl font-bold text-white mb-1">{type.code}</div>
-                <div className="text-base text-gray-200 mb-2 font-semibold">{type.name}</div>
-                <button
-                  className="text-purple-100 hover:underline text-xs font-bold transition-all duration-200"
-                  // onClick={() => setModalType(type)} // For modal integration
-                >
-                  Learn more
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        {/* Card showing how many people have used the website */}
-        <section className="w-full flex flex-col items-center justify-center py-16 md:py-24 px-2">
-          <div className="w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto bg-[#18192a] dark:bg-[#18192a] rounded-3xl p-6 sm:p-8 md:p-10 border border-purple-400/30 shadow-2xl flex flex-col items-center text-center">
-            <h3 className="text-3xl font-extrabold text-purple-100 dark:text-purple-200 mb-4 flex flex-col items-center">
-              Join the Community!
-              <span className="mt-2 text-base text-gray-300">Follow us on</span>
-              <a href="https://www.instagram.com/codesentinel.tech/" target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center justify-center text-pink-400 hover:text-pink-500 transition-colors"
-                onClick={async () => {
-                  await trackClick({
-                    link: 'Instagram',
-                    href: 'https://www.instagram.com/codesentinel.tech/',
-                    userId: user?.uid,
-                    userEmail: user?.email || undefined,
-                  });
-                }}
-              >
-                <Instagram className="w-7 h-7" />
-              </a>
-            </h3>
-            <p className="text-lg text-gray-200 dark:text-white/90 mb-2">
-              <span className="font-bold text-pink-400 text-2xl">{clickCount.toLocaleString()}</span> personalities and counting—add yours!
-            </p>
-          </div>
-        </section>
+      {/* Card showing how many people have used the website */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in-up">
+        <div className="bg-[#18192a]/90 backdrop-blur-lg rounded-3xl p-6 sm:p-8 md:p-10 border border-purple-400/30 shadow-2xl text-center">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-purple-100 mb-4 sm:mb-6 flex flex-col items-center">
+            Join the Community!
+            <span className="mt-2 text-base sm:text-lg text-gray-300">Follow us on</span>
+            <a href="https://www.instagram.com/codesentinel.tech/" target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center justify-center text-pink-400 hover:text-pink-500 transition-colors">
+              <Instagram className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+          </h3>
+          <p className="text-lg sm:text-xl text-gray-200 mb-4 sm:mb-6">
+            <span className="font-bold text-pink-400 text-2xl sm:text-3xl">{clickCount.toLocaleString()}</span> personalities and counting—add yours!
+          </p>
+          <Link
+            href="/quiz"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg text-lg sm:text-xl min-h-[48px] sm:min-h-[56px]"
+            onClick={async () => {
+              await trackClick({
+                link: 'Join Community',
+                href: '/quiz',
+                userId: user?.uid || undefined,
+                userEmail: user?.email || undefined,
+              });
+            }}
+          >
+            <Star className="w-5 h-5 sm:w-6 sm:h-6" />
+            Start Your Journey
+          </Link>
+        </div>
+      </section>
 
         {/* Minimal Footer */}
         <footer className="w-full py-4 bg-black/60 border-t border-white/20 text-center mt-8">

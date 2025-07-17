@@ -88,17 +88,17 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen px-2">
+    <div className="min-h-screen px-2 sm:px-4">
       <Navigation />
-      <div className="container mx-auto pt-24">
+      <div className="container mx-auto pt-24 sm:pt-28">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-white mb-2">Personality Assessment</h1>
-          <p className="text-gray-200">Choose the option that best describes you</p>
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">Personality Assessment</h1>
+          <p className="text-gray-200 text-sm sm:text-base">Choose the option that best describes you</p>
         </div>
 
         {/* Progress Bar */}
-        <div className="max-w-4xl mx-auto mb-8">
+        <div className="max-w-4xl mx-auto mb-6 sm:mb-8">
           <ProgressBar current={currentQuestionIndex + 1} total={questions.length} />
         </div>
 
@@ -107,19 +107,8 @@ export default function QuizPage() {
           <ModernQuestionCard
             question={questions[currentQuestionIndex]}
             onAnswer={handleAnswer}
-            currentAnswer={getCurrentAnswer()}
             isTransitioning={isTransitioning}
           />
-        </div>
-
-        {/* Question Counter */}
-        <div className="text-center mt-8">
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-2 border border-white/20 dark:border-gray-700/20">
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-              Question {currentQuestionIndex + 1} of {questions.length}
-            </span>
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-          </div>
         </div>
       </div>
     </div>

@@ -171,19 +171,19 @@ Take the test again at: ${window.location.origin}
   };
 
   return (
-    <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-3xl p-8 border border-white/20 dark:border-gray-700/20">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">Share Your Results</h2>
-        <p className="text-gray-600 dark:text-gray-400">Let others know about your personality type or save your results</p>
+    <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-white/20 dark:border-gray-700/20">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">Share Your Results</h2>
+        <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Let others know about your personality type or save your results</p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Share Button */}
         <button
           onClick={handleShare}
-          className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg"
+          className="flex items-center justify-center gap-2 sm:gap-3 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg text-sm sm:text-base"
         >
-          {copied ? <Check className="w-5 h-5" /> : <Share2 className="w-5 h-5" />}
+          {copied ? <Check className="w-4 h-4 sm:w-5 sm:h-5" /> : <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />}
           {copied ? 'Copied!' : 'Share Result'}
         </button>
 
@@ -191,43 +191,43 @@ Take the test again at: ${window.location.origin}
         <button
           onClick={generateShareImage}
           disabled={isGeneratingImage}
-          className="flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white px-6 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg"
+          className="flex items-center justify-center gap-2 sm:gap-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg text-sm sm:text-base"
         >
-          <ImageIcon className="w-5 h-5" />
+          <ImageIcon className="w-4 h-4 sm:w-5 sm:h-5" />
           {isGeneratingImage ? 'Generating...' : 'Share Image'}
         </button>
 
         {/* Download Report */}
         <button
           onClick={generatePDFReport}
-          className="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg"
+          className="flex items-center justify-center gap-2 sm:gap-3 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg text-sm sm:text-base"
         >
-          <Download className="w-5 h-5" />
+          <Download className="w-4 h-4 sm:w-5 sm:h-5" />
           Download Report
         </button>
 
         {/* Retake Quiz */}
         <button
           onClick={onRestart}
-          className="flex items-center justify-center gap-3 bg-gray-600 hover:bg-gray-700 text-white px-6 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg"
+          className="flex items-center justify-center gap-2 sm:gap-3 bg-gray-600 hover:bg-gray-700 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 shadow-lg text-sm sm:text-base"
         >
-          <RotateCcw className="w-5 h-5" />
+          <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
           Retake Quiz
         </button>
       </div>
 
       {/* Additional Info */}
-      <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border border-blue-200 dark:border-blue-800">
+      <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border border-blue-200 dark:border-blue-800">
         <div className="text-center">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Want to Compare Results?</h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Want to Compare Results?</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">
             Share this test with friends and family to see how your personalities complement each other!
           </p>
           <button
             onClick={() => navigator.clipboard.writeText(window.location.origin)}
-            className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-xl font-medium transition-colors border border-gray-200 dark:border-gray-700"
+            className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 sm:px-4 py-2 rounded-xl font-medium transition-colors border border-gray-200 dark:border-gray-700 text-sm sm:text-base"
           >
-            <Copy className="w-4 h-4" />
+            <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
             Copy Test Link
           </button>
         </div>
